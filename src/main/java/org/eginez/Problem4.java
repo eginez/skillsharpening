@@ -1,8 +1,6 @@
 package org.eginez;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Problem4 {
 
@@ -40,6 +38,30 @@ public class Problem4 {
     }
 
 
-    // Try this again with Dynamic Programming.
+    //
+    public static List<Integer> coinsWithValsDP(int target, List<Integer> coins, Map<Integer, List<Integer>> cache) {
+
+        if (cache.containsKey(target)) {
+            return cache.get(target);
+        }
+
+        if (target == 0) {
+            return new ArrayList<>();
+        }
+
+        List<List<Integer>> sols = new ArrayList<>();
+        for (Integer c : coins) {
+            if (target >= c) {
+                List<Integer> l = new ArrayList<>(coinsWithValsDP(target - c, coins, cache));
+                l.add(c);
+                sols.add(l);
+            }
+        }
+
+        List<Integer> min = sols.stream().min(Comparator.comparingInt(List::size)).get();
+        cache.put(target, min);
+        return min;
+
+    }
     
 }
