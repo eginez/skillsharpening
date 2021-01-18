@@ -17,5 +17,9 @@ class SearchRotated(unittest.TestCase):
         self.assertTrue(set6.search_rotated_sorted(2, [2,3,5,6,7,8,0]))
 
 
+class MaxSubArrayTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(6, set6.max_subarray([-2,1,-3,4,-1,2,1,-5,4]))
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,26 @@
 from typing import List
 
 
+def max_subarray(nums: List[int]) -> int:
+    n = [[0 for i in range(len(nums))] for j in range(len(nums))]
+    max_num = None
+    for i in range(len(nums)):
+        for j in range(i, len(nums)):
+            if i == j:
+                n[i][j] = nums[i]
+                continue
+            if i == 0:
+                prev = max(j -1, 0)
+                n[i][j] = n[i][prev] + nums[j]
+            else:
+                n[i][j] = n[i - 1][j] - nums[i -1]
+            if max_num is None or n[i][j] >= max_num:
+                max_num = n[i][j]
+    return max_num
+
+
+
+
 def min_awk(arr):
     pass
 
