@@ -21,5 +21,10 @@ class MaxSubArrayTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(6, set6.max_subarray([-2,1,-3,4,-1,2,1,-5,4]))
 
+class MinWindow(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual("BANC", set6.min_window("ADOBECODEBANC", "ABC"))
+        self.assertEqual("BAC", set6.min_window("ABAC", "BC"))
+
 if __name__ == '__main__':
     unittest.main()

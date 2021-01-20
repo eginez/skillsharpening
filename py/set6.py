@@ -1,6 +1,46 @@
 from typing import List
 
 
+def min_windows_helper(root, children: List[List[int]]) -> ([int], int):
+    if len(children) == 0:
+        return [root], 0
+
+    min_val = None
+
+    for i in children[0]:
+        child_val, diff = min_windows_helper(i, children[1:])
+        len_diff = abs(child_val[0] - root)
+        max_dis = max(len_diff, diff)
+        if min_val is None or max_dis < min_val[1]:
+            min_val = ([root] + child_val, max_dis)
+    return min_val
+
+
+def min_window(word: str, target: str) -> str:
+    letters = {}
+    for i in range(len(word)):
+        l = word[i]
+        if l in letters:
+            letters[l] += [i]
+        else:
+            letters[l] = [i]
+
+    arr = []
+    for t in target:
+        arr += [letters[t]]
+
+    min_dis = None
+    pos = []
+    for i in arr[0]:
+        pos, dis = min_windows_helper(i, arr[1:])
+        if min_dis is None or min_dis[1] < dis:
+            min_dis = pos, dis
+    pos.sort()
+    return word[pos[0]:pos[-1] + 1]
+
+
+
+
 def max_subarray(nums: List[int]) -> int:
     n = [[0 for i in range(len(nums))] for j in range(len(nums))]
     max_num = None
