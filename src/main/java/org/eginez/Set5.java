@@ -143,8 +143,9 @@ public class Set5 {
     }
 
 
-    static class Node {
+    public static class Node {
         int val;
+        int order;
         List<Node> neighbors;
 
         public Node() {
@@ -157,6 +158,18 @@ public class Set5 {
         public Node(int val, List<Node> neighbors) {
             this.val = val;
             this.neighbors = neighbors;
+        }
+
+        public int getVal() {
+            return val;
+        }
+
+        public int getOrder() {
+            return order;
+        }
+
+        public String toString() {
+            return String.format("%d %d", val, order);
         }
     }
 
@@ -180,5 +193,6 @@ public class Set5 {
 
         return newNode;
     }
+
 
 }
