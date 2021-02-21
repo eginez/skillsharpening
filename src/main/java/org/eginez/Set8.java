@@ -123,4 +123,17 @@ public class Set8 {
         node.next= null;
     }
 
+    public static List<Integer> shuffle(List<Integer> list) {
+        List<Integer> shuffled = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>(list);
+        int rIndex = 0;
+        Random rand = new Random();
+        while(!temp.isEmpty()) {
+            rIndex = rand.nextInt(temp.size()) ;
+            Integer picked = temp.remove(rIndex);
+            shuffled.add(picked);
+        }
+        return shuffled;
+    }
+
 }

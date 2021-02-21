@@ -13,4 +13,13 @@ public class Set8Test {
         sol = Set8.rangeWorkout(inp);
         System.out.println(sol);
     }
+
+    @Test
+    public void testShuffle() {
+        List<Integer> shuffled = null;
+        for(int i = 0; i < 4; i++) {
+            shuffled = Set8.shuffle(Arrays.asList(1, 2, 3, 4));
+            System.out.println(shuffled);
+        }
+    }
 }
