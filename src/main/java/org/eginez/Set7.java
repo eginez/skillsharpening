@@ -79,8 +79,6 @@ public class Set7 {
             res = Math.max(res, max);
         }
         return res;
-
     }
-
 }
 

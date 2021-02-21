@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 public class Set7Test {
     @Test
@@ -14,6 +15,7 @@ public class Set7Test {
 
         prod = Set7.maxProduct(new int[]{7,-2,-4});
         Assertions.assertEquals(56,prod);
+
 
     }
 }
