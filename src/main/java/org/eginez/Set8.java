@@ -136,4 +136,122 @@ public class Set8 {
         return shuffled;
     }
 
+
+    public static class LRUNode {
+        LRUNode next;
+        LRUNode previous;
+        int val;
+        int key;
+
+        LRUNode(int key, int val) {
+            this.val = val;
+            this.key = val;
+        }
+    }
+
+    public static class LRUList {
+        private LRUNode head;
+        private LRUNode tail;
+
+        public LRUList() { }
+
+        public void push(LRUNode node) {
+            assert node != null;
+           node.next = head;
+           node.previous = null;
+
+           if (head == null) {
+               tail = node;
+           } else {
+               head.previous = node;
+           }
+           head = node;
+        }
+
+        public LRUNode delete(LRUNode node) {
+            assert node != null;
+            LRUNode next = node.next;
+            LRUNode prev = node.previous;
+
+            if (prev != null)
+                prev.next = next;
+            else {
+                //the head
+                head = next;
+                if (head != null) {
+                    head.previous = null;
+                }
+            }
+            if (next != null)
+                next.previous = prev;
+            else {
+                //the tail
+                tail = prev;
+                if (tail != null) {
+                    tail.next = null;
+                }
+            }
+
+            return node;
+        }
+
+        public LRUNode popTail() {
+            return delete(tail);
+        }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("[");
+            for(LRUNode node = head; node != null; node = node.next) {
+                sb.append(node.val);
+                sb.append("->");
+            }
+            sb.append("]");
+            return sb.toString();
+        }
+    }
+
+    public static class Cache {
+        private final LRUList list;
+        private final Map<Integer, LRUNode> map;
+        private final int capacity;
+
+        public Cache(int capacity) {
+            this.capacity = capacity;
+            list = new LRUList();
+            map = new HashMap<>(capacity);
+        }
+
+        public int get(int key) {
+            if(!map.containsKey(key)) {
+                throw new IllegalArgumentException("cache miss on" + key);
+            }
+
+            LRUNode node = map.get(key);
+            list.delete(node);
+            list.push(node);
+            return node.val;
+        }
+
+        public void put(int key, int value) {
+            if (map.size() >= capacity)  {
+               LRUNode evicted = list.popTail();
+               map.remove(evicted.key);
+            }
+
+            LRUNode newNode = new LRUNode(key, value);
+            map.put(key, newNode);
+            list.push(newNode);
+        }
+
+        public boolean containsKey(int key) {
+            return map.containsKey(key);
+        }
+
+        public String toString() {
+            return "Map = " + map + "\n" +
+                    "List=" + list;
+        }
+    }
+
 }

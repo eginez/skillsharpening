@@ -1,5 +1,6 @@
 package org.eginez;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -21,5 +22,22 @@ public class Set8Test {
             shuffled = Set8.shuffle(Arrays.asList(1, 2, 3, 4));
             System.out.println(shuffled);
         }
+    }
+
+    @Test
+    public void testCache() {
+        Set8.Cache cache = new Set8.Cache(2);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        Assertions.assertTrue(cache.containsKey(1));
+        cache.put(3, 3);
+        Assertions.assertFalse(cache.containsKey(1));
+        cache.put(4, 4);
+        Assertions.assertFalse(cache.containsKey(2));
+        cache.get(3);
+        Assertions.assertTrue(cache.containsKey(4));
+        cache.put(5, 5);
+        Assertions.assertFalse(cache.containsKey(4));
+        System.out.println(cache);
     }
 }
