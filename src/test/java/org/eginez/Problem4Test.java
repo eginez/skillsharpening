@@ -9,17 +9,11 @@ import java.util.List;
 
 public class Problem4Test {
     @Test
-    public void testWithCoins() {
-        Assertions.assertEquals(2, Problem4.coinNum(6));
-        Assertions.assertEquals(3, Problem4.coinNum(27));
-        Assertions.assertEquals(3, Problem4.coinNum(31));
-    }
-    @Test
-    public void testWithValues() {
-        List<Integer> sol = Problem4.coinsWithValsDP(31, Arrays.asList(1, 10, 25), new HashMap<>());
-        Assertions.assertEquals(Arrays.asList(10, 10, 10, 1), sol);
+    public void test2() {
+        int sol = Problem4.coinsCount(31, Arrays.asList(1, 10, 25), new HashMap<>());
+        Assertions.assertEquals(4, sol);
 
-        sol = Problem4.coinsWithValsDP(33, Arrays.asList(1, 10, 25), new HashMap<>());
-        Assertions.assertEquals(Arrays.asList(10, 10, 10, 1, 1, 1), sol);
+        sol = Problem4.coinsCount(33, Arrays.asList(1, 10, 25), new HashMap<>());
+        Assertions.assertEquals(6, sol);
     }
 }
