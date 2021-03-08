@@ -60,6 +60,14 @@ public class Set11 {
             this.h = h;
         }
 
+        public boolean overlaps(Rectangle other) {
+            Point lowerRight = new Point(origin.x + w, origin.y);
+            Point upperRight = new Point(origin.x + w, origin.y + h);
+            return lowerRight.x > other.origin.x &&
+                    other.origin.x + other.w > origin.x &&
+                    upperRight.y > other.origin.y &&
+                    other.origin.y + h > origin.y;
+        }
     };
 
     public static class Edge {
